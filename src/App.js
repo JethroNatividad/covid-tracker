@@ -6,11 +6,14 @@ function App() {
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
   const [countries, setCountries] = useState([]);
-  const [dropdownValue, setDropdownValue] = useState('worldwide');
-  const handleDropdown = (evt) => {
+
+  const [country, setCountry] = useState('worldwide');
+
+  const handleCountryChange = (evt) => {
     evt.preventDefault();
-    setDropdownValue(evt.target.value);
+    setCountry(evt.target.value);
   };
+
   useEffect(() => {
     const FetchCountries = async () => {
       console.log('useeffect');
@@ -23,6 +26,7 @@ function App() {
     };
     FetchCountries();
   }, []);
+
   return (
     <div className='app'>
       <div className='app__header'>
@@ -30,12 +34,12 @@ function App() {
         <FormControl className='app__dropdown'>
           <Select
             variant='outlined'
-            value={dropdownValue}
-            onChange={handleDropdown}
+            value={country}
+            onChange={handleCountryChange}
           >
             <MenuItem value='worldwide'>Worldwide</MenuItem>
             {countries.map((country) => (
-              <MenuItem key={country.name} value={country.name}>
+              <MenuItem key={country.name} value={country.value}>
                 {country.name}
               </MenuItem>
             ))}
@@ -45,6 +49,7 @@ function App() {
       {/* header */}
       {/* title & select box */}
 
+      <div className='app__stats'></div>
       {/* InfoBox */}
       {/* InfoBox */}
       {/* InfoBox */}
