@@ -10,6 +10,8 @@ import './App.css';
 import axios from 'axios';
 import InfoBox from './InfoBox';
 import Map from './Map';
+import Table from './Table';
+import { sortData } from './helpers';
 function App() {
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
@@ -46,7 +48,8 @@ function App() {
         name: country.country,
         value: country.countryInfo.iso2,
       }));
-      setTableData(countriesData);
+      const sortedByCases = sortData(countriesData);
+      setTableData(sortedByCases);
       setCountries(countries);
     };
     FetchCountries();
@@ -93,7 +96,8 @@ function App() {
       </div>
       <Card className='app__right'>
         <CardContent>
-          <p>Table</p>
+          <p>Live cases by country</p>
+          <Table data={tableData} />
           {/* table */}
           <p>Graph</p>
           {/* graph */}

@@ -22,3 +22,6 @@ body {
   display: flex;
   justify-content: space-between;
 }
+.app__left {
+  flex: 0.9;
+}
