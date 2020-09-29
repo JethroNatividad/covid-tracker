@@ -6,11 +6,16 @@ function InfoBox({ title, cases, total }) {
     <Card className='infoBox'>
       <CardContent>
         {/* Title here. e.g. Coronavirus cases / Deaths */}
-        <Typography></Typography>
+        <Typography className='infoBox__title' color='textSecondary'>
+          {title}
+        </Typography>
         {/* Number of cases. e.g. +12,000 */}
-        <Typography></Typography>
+        <h2 className='infoBox__cases'>+ {cases}</h2>
+
         {/* Total. e.g. 12M Total */}
-        <Typography></Typography>
+        <Typography className='infoBox__total' color='textSecondary'>
+          {total} Total
+        </Typography>
       </CardContent>
     </Card>
   );
