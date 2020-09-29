@@ -4,6 +4,10 @@
   margin-top: 20px;
   color: #6a5d5d;
 }
+/* removes ugly scrollbar */
+.table::-webkit-scrollbar {
+  display: none;
+}
 .table tr {
   display: flex;
   justify-content: space-between;
