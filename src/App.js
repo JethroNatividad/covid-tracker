@@ -12,6 +12,7 @@ import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
 import { sortData } from './helpers';
+import Linegraph from './Linegraph';
 function App() {
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
@@ -100,6 +101,7 @@ function App() {
           <Table data={tableData} />
           {/* table */}
           <p>Graph</p>
+          <Linegraph BASE_API={BASE_API} />
           {/* graph */}
         </CardContent>
       </Card>
