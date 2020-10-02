@@ -3,6 +3,7 @@
   overflow: scroll;
   margin-top: 20px;
   color: #6a5d5d;
+  margin-bottom: 10px;
 }
 /* removes ugly scrollbar */
 .table::-webkit-scrollbar {
