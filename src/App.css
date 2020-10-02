@@ -8,10 +8,13 @@ body {
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
+  margin-bottom: 50px;
 }
 @media (max-width: 850px) {
   .app {
     flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 .app__header {
@@ -20,10 +23,18 @@ body {
   align-items: center;
   margin-bottom: 15px;
 }
+.app__header > h1 {
+  color: #960c1a;
+}
 .app__stats {
   display: flex;
   justify-content: space-between;
 }
 .app__left {
   flex: 0.9;
+}
+.app__dropdown {
+  background-color: #fff;
+  width: 150px;
+  text-align: center;
 }

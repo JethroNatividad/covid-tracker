@@ -83,7 +83,7 @@ function App() {
     <div className='app'>
       <div className='app__left'>
         <div className='app__header'>
-          <h1>COVID_19 TRACKER</h1>
+          <h1>COVID-19 TRACKER</h1>
           <FormControl className='app__dropdown'>
             <Select
               variant='outlined'
@@ -101,18 +101,24 @@ function App() {
         </div>
         <div className='app__stats'>
           <InfoBox
+            casesType='cases'
+            active={casesType === 'cases'}
             handleClick={() => setCasesType('cases')}
             title='Coronavirus cases'
             total={countryInfo.cases}
             cases={countryInfo.todayCases}
           />
           <InfoBox
+            casesType='recovered'
+            active={casesType === 'recovered'}
             handleClick={() => setCasesType('recovered')}
             title='Recovered'
             total={countryInfo.recovered}
             cases={countryInfo.todayRecovered}
           />
           <InfoBox
+            casesType='deaths'
+            active={casesType === 'deaths'}
             handleClick={() => setCasesType('deaths')}
             title='Deaths'
             total={countryInfo.deaths}
@@ -130,10 +136,10 @@ function App() {
         <CardContent>
           <strong>LIVE CASES BY COUNTRY</strong>
           <Table data={tableData} />
-          {/* table */}
-          <strong>WORLDWIDE NEW {casesType.toUpperCase()}</strong>
-          <Linegraph BASE_API={BASE_API} casesType={casesType} />
-          {/* graph */}
+          <div className='app__graph'>
+            <strong>WORLDWIDE NEW {casesType.toUpperCase()}</strong>
+            <Linegraph BASE_API={BASE_API} casesType={casesType} />
+          </div>
         </CardContent>
       </Card>
     </div>
