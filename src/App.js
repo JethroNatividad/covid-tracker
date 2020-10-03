@@ -1,14 +1,13 @@
 import React from 'react';
-import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
-import Linegraph from './Linegraph';
 import Header from './Header';
+import InfoBox from './InfoBox';
+import Linegraph from './Linegraph';
 import { Card, CardContent } from '@material-ui/core';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
 function App() {
-  console.log('in App');
   return (
     <div className='app'>
       <div className='app__left'>

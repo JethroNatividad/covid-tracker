@@ -1,17 +1,17 @@
 import React from 'react';
-import './Linegraph.css';
-import { Line } from 'react-chartjs-2';
 import options from './linegraphOptions';
+import { Line } from 'react-chartjs-2';
 import { useCountriesContext } from './CountriesProvider';
+import './Linegraph.css';
 
 function Linegraph() {
-  console.log('in Linegraph');
-
+  //context data
   const { linegraphData, casesType } = useCountriesContext();
   return (
     <>
       <strong>WORLDWIDE NEW {casesType.toUpperCase()}</strong>
       <div className='linegraph'>
+        {/* the linegrapgh accepts options and data */}
         <Line
           options={options}
           data={{

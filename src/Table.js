@@ -1,9 +1,9 @@
 import React from 'react';
 import numeral from 'numeral';
-import './Table.css';
 import { useCountriesContext } from './CountriesProvider';
+import './Table.css';
 function Table() {
-  console.log('in Table');
+  //context data
   const { tableData } = useCountriesContext();
   return (
     <>

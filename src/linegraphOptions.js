@@ -1,5 +1,5 @@
 import numeral from 'numeral';
-
+//just the options of the linegraph
 export default {
   legend: {
     display: false,

@@ -1,8 +1,8 @@
-import { FormControl, MenuItem, Select } from '@material-ui/core';
 import React from 'react';
-import './Header.css';
-import { useCountriesContext } from './CountriesProvider';
 import { actions } from './reducer';
+import { useCountriesContext } from './CountriesProvider';
+import { FormControl, MenuItem, Select } from '@material-ui/core';
+import './Header.css';
 
 function Header() {
   console.log('in Header');

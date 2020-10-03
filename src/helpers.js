@@ -22,6 +22,7 @@ export const buildChartData = (data, type) => {
   }
   return chartData;
 };
+//color
 const casesTypeColor = {
   cases: {
     hex: '#CC1034',
@@ -36,17 +37,27 @@ const casesTypeColor = {
     multiplier: 2000,
   },
 };
+
+//simple formatter
 export const formatNumber = (number) =>
   numeral(number).format('0,0a').toUpperCase();
+
+//this generates all the Circles on the map
 export const showDataOnMap = (data, type) =>
   data.map((country) => (
     <Circle
+      //this is where the circle is located
       center={[country.countryInfo.lat, country.countryInfo.long]}
+      //opacity of the circle
       fillOpacity={0.4}
+      //border color based on the case type
       color={casesTypeColor[type].hex}
+      //background color of the circle based on the case type
       fillColor={casesTypeColor[type].hex}
+      //radius of the circle, square root of the cases * the multiplier
       radius={Math.sqrt(country[type]) * casesTypeColor[type].multiplier}
     >
+      {/* data displayed when clicking the circle */}
       <Popup>
         <div className='info-container'>
           <div
@@ -67,7 +78,7 @@ export const showDataOnMap = (data, type) =>
       </Popup>
     </Circle>
   ));
-
+//to capitalize first letter of string
 export const capitalizeFirstLetter = (value) => {
   return value.charAt(0).toUpperCase() + value.slice(1);
 };

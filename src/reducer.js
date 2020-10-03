@@ -1,3 +1,4 @@
+//the initial state value
 export const initialState = {
   countries: [],
   country: 'worldwide',

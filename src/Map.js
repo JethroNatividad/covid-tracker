@@ -1,7 +1,7 @@
 import React from 'react';
-import { Map as LeafletMap, TileLayer } from 'react-leaflet';
-import { useCountriesContext } from './CountriesProvider.js';
 import { showDataOnMap } from './helpers.js';
+import { useCountriesContext } from './CountriesProvider.js';
+import { Map as LeafletMap, TileLayer } from 'react-leaflet';
 import './Map.css';
 function Map() {
   //context

@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { stateReducer, initialState } from './reducer';
-import { actions } from './reducer';
 import axios from 'axios';
+import { actions } from './reducer';
 import { buildChartData, sortData } from './helpers';
+import { stateReducer, initialState } from './reducer';
 
 const CountriesContext = createContext();
 const CountriesDispatch = createContext();
+
 export const CountriesProvider = ({ children }) => {
   const BASE_API = 'https://disease.sh/v3/covid-19';
   const [state, dispatch] = useReducer(stateReducer, initialState);
