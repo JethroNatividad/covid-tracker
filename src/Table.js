@@ -1,10 +1,12 @@
 import React from 'react';
 import numeral from 'numeral';
 import './Table.css';
-function Table({ data }) {
+import { useCountriesContext } from './CountriesProvider';
+function Table() {
+  const { tableData } = useCountriesContext();
   return (
     <div className='table'>
-      {data.map(({ country, cases }) => (
+      {tableData.map(({ country, cases }) => (
         <tr>
           <td>{country}</td>
           <td>

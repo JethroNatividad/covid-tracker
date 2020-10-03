@@ -15,19 +15,19 @@ function InfoBox({ title, caseType }) {
     deaths: ' #fb4443',
   };
   const handleClick = () => {
-    dispatch({ type: actions.SET_CASES_TYPE, data: casesType });
+    dispatch({ type: actions.SET_CASES_TYPE, data: caseType });
   };
   return (
     <Card
       className='infoBox'
-      style={{ borderTop: active && `10px solid ${color[casesType]}` }}
+      style={{ borderTop: active && `10px solid ${color[caseType]}` }}
       onClick={handleClick}
     >
       <CardContent>
         <Typography className='infoBox__title' color='textSecondary'>
           {title}
         </Typography>
-        <h2 className='infoBox__cases' style={{ color: color[casesType] }}>
+        <h2 className='infoBox__cases' style={{ color: color[caseType] }}>
           + {formatNumber(cases)}
         </h2>
         <Typography className='infoBox__total' color='textSecondary'>

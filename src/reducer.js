@@ -3,6 +3,7 @@ export const initialState = {
   country: 'worldwide',
   countryInfo: {},
   tableData: [],
+  linegraphData: [],
   mapCountries: [],
   mapCenter: {
     lat: 34.80746,
@@ -17,6 +18,7 @@ export const actions = {
   SET_COUNTRY: 'SET_COUNTRY',
   SET_COUNTRY_INFO: 'SET_COUNTRY_INFO',
   SET_TABLE_DATA: 'SET_TABLE_DATA',
+  SET_LINEGRAPH_DATA: 'SET_LINEGRAPH_DATA',
   SET_MAP_COUNTRIES: 'SET_MAP_COUNTRIES',
   SET_MAP_CENTERZOOM: 'SET_MAP_CENTERZOOM',
   SET_CASES_TYPE: 'SET_CASES_TYPE',
@@ -33,6 +35,8 @@ export const stateReducer = (state, action) => {
       return { ...state, countryInfo: action.data };
     case actions.SET_TABLE_DATA:
       return { ...state, tableData: action.data };
+    case actions.SET_LINEGRAPH_DATA:
+      return { ...state, linegraphData: action.data };
     case actions.SET_MAP_COUNTRIES:
       return { ...state, mapCountries: action.data };
     case actions.SET_MAP_CENTERZOOM:

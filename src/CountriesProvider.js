@@ -2,14 +2,14 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { stateReducer, initialState } from './reducer';
 import { actions } from './reducer';
 import axios from 'axios';
-import { sortData } from './helpers';
+import { buildChartData, sortData } from './helpers';
 
 const CountriesContext = createContext();
 
 export const CountriesProvider = ({ children }) => {
   const BASE_API = 'https://disease.sh/v3/covid-19';
   const [state, dispatch] = useReducer(stateReducer, initialState);
-  const { country } = state;
+  const { country, casesType } = state;
 
   //fetches the country info of the Country
   //example value of Country, 'worldwide', 'UK', 'AF
@@ -87,6 +87,17 @@ export const CountriesProvider = ({ children }) => {
     };
     FetchCountries();
   }, []);
+
+  useEffect(() => {
+    const FetchData = async () => {
+      const response = await axios.get(
+        `${BASE_API}/historical/all?lastdays=120`
+      );
+      const chartData = buildChartData(response.data, casesType);
+      dispatch({ type: actions.SET_LINEGRAPH_DATA, data: chartData });
+    };
+    FetchData();
+  }, [casesType]);
   return (
     <CountriesContext.Provider value={{ ...state, dispatch: dispatch }}>
       {children}

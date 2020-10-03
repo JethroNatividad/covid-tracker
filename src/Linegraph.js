@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Linegraph.css';
 import { Line } from 'react-chartjs-2';
-import axios from 'axios';
-import { buildChartData } from './helpers';
 import options from './linegraphOptions';
+import { useCountriesContext } from './CountriesProvider';
 
-function Linegraph({ BASE_API, casesType = 'cases' }) {
-  const [data, setData] = useState();
-  useEffect(() => {
-    const FetchData = async () => {
-      const response = await axios.get(
-        `${BASE_API}/historical/all?lastdays=120`
-      );
-      const chartData = buildChartData(response.data, casesType);
-      setData(chartData);
-    };
-    FetchData();
-  }, [casesType]);
-
+function Linegraph() {
+  const { linegraphData } = useCountriesContext();
   return (
     <div className='linegraph'>
       <Line
@@ -25,7 +13,7 @@ function Linegraph({ BASE_API, casesType = 'cases' }) {
         data={{
           datasets: [
             {
-              data: data,
+              data: linegraphData,
               backgroundColor: 'rgba(204, 16, 52, 0.5)',
               borderColor: '#cc1034',
             },

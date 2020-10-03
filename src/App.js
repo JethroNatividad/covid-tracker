@@ -10,7 +10,7 @@ import { useCountriesContext } from './CountriesProvider';
 import Header from './Header';
 function App() {
   //CONTEXT STATE
-  const { tableData, casesType } = useCountriesContext();
+  const { casesType } = useCountriesContext();
 
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
@@ -19,7 +19,6 @@ function App() {
     <div className='app'>
       <div className='app__left'>
         <Header />
-
         <div className='app__stats'>
           <InfoBox caseType='cases' title='Coronavirus cases' />
           <InfoBox caseType='recovered' title='Recovered' />
@@ -30,7 +29,7 @@ function App() {
       <Card className='app__right'>
         <CardContent>
           <strong>LIVE CASES BY COUNTRY</strong>
-          <Table data={tableData} />
+          <Table />
           <div className='app__graph'>
             <strong>WORLDWIDE NEW {casesType.toUpperCase()}</strong>
             <Linegraph BASE_API={BASE_API} casesType={casesType} />
