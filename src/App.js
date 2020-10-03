@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  FormControl,
-  MenuItem,
-  Select,
-} from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 import './App.css';
 import { actions } from './reducer';
 import InfoBox from './InfoBox';
@@ -14,12 +8,11 @@ import Table from './Table';
 import Linegraph from './Linegraph';
 import 'leaflet/dist/leaflet.css';
 import { useCountriesContext } from './CountriesProvider';
+import Header from './Header';
 function App() {
   //CONTEXT STATE
   const {
     dispatch,
-    countries,
-    country,
     countryInfo,
     tableData,
     mapCountries,
@@ -31,38 +24,11 @@ function App() {
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
 
-  //runs if Select country changes
-  const handleCountryChange = (evt) => {
-    //prevents page refresh
-    evt.preventDefault();
-
-    //country code value
-    const countryCode = evt.target.value;
-
-    //set the current country to the country code
-    dispatch({ type: actions.SET_COUNTRY, data: countryCode });
-  };
-
   return (
     <div className='app'>
       <div className='app__left'>
-        <div className='app__header'>
-          <h1>COVID-19 TRACKER</h1>
-          <FormControl className='app__dropdown'>
-            <Select
-              variant='outlined'
-              value={country}
-              onChange={handleCountryChange}
-            >
-              <MenuItem value='worldwide'>Worldwide</MenuItem>
-              {countries?.map((country) => (
-                <MenuItem key={country.name} value={country.value}>
-                  {country.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
+        <Header />
+
         <div className='app__stats'>
           <InfoBox
             casesType='cases'

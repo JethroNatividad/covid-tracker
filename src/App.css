@@ -17,15 +17,7 @@ body {
     padding-right: 15px;
   }
 }
-.app__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-.app__header > h1 {
-  color: #960c1a;
-}
+
 .app__stats {
   display: flex;
   justify-content: space-between;
