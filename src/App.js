@@ -17,20 +17,20 @@ import 'leaflet/dist/leaflet.css';
 import { useCountriesContext } from './CountriesProvider';
 import { actions } from './reducer';
 function App() {
-  const { dispatch, countries, country } = useCountriesContext();
+  const {
+    dispatch,
+    countries,
+    country,
+    countryInfo,
+    tableData,
+    mapCountries,
+    mapCenter,
+    mapZoom,
+    casesType,
+  } = useCountriesContext();
 
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
-
-  const [countryInfo, setCountryInfo] = useState({});
-  const [tableData, setTableData] = useState([]);
-  const [mapCountries, setMapCountries] = useState([]);
-  const [mapCenter, setMapCenter] = useState({
-    lat: 34.80746,
-    lng: -40.4796,
-  });
-  const [mapZoom, setMapZoom] = useState(2);
-  const [casesType, setCasesType] = useState('cases');
   const handleCountryChange = (evt) => {
     evt.preventDefault();
     const countryCode = evt.target.value;
@@ -45,19 +45,25 @@ function App() {
           : `${BASE_API}/countries/${country}`;
       const response = await axios.get(url);
       const data = response.data;
-      setCountryInfo(data);
+      dispatch({ type: actions.SET_COUNTRY_INFO, data: data });
       if (country === 'worldwide') {
-        setMapCenter({
-          lat: 34.80746,
-          lng: -40.4796,
+        dispatch({
+          type: actions.SET_MAP_CENTERZOOM,
+          center: {
+            lat: 34.80746,
+            lng: -40.4796,
+          },
+          zoom: 3,
         });
-        setMapZoom(3);
       } else {
-        setMapCenter({
-          lat: data.countryInfo.lat,
-          lng: data.countryInfo.long,
+        dispatch({
+          type: actions.SET_MAP_CENTERZOOM,
+          center: {
+            lat: data.countryInfo.lat,
+            lng: data.countryInfo.long,
+          },
+          zoom: 4,
         });
-        setMapZoom(4);
       }
     };
     FetchCountryInfo();
@@ -74,9 +80,9 @@ function App() {
         value: country.countryInfo.iso2,
       }));
       const sortedByCases = sortData(data);
-      setTableData(sortedByCases);
+      dispatch({ type: actions.SET_TABLE_DATA, data: sortedByCases });
       dispatch({ type: actions.SET_COUNTRIES, data: allcountries });
-      setMapCountries(data);
+      dispatch({ type: actions.SET_MAP_COUNTRIES, data: data });
     };
     FetchCountries();
   }, []);
@@ -105,7 +111,9 @@ function App() {
           <InfoBox
             casesType='cases'
             active={casesType === 'cases'}
-            handleClick={() => setCasesType('cases')}
+            handleClick={() =>
+              dispatch({ type: actions.SET_CASES_TYPE, data: 'cases' })
+            }
             title='Coronavirus cases'
             total={countryInfo.cases}
             cases={countryInfo.todayCases}
@@ -113,7 +121,9 @@ function App() {
           <InfoBox
             casesType='recovered'
             active={casesType === 'recovered'}
-            handleClick={() => setCasesType('recovered')}
+            handleClick={() =>
+              dispatch({ type: actions.SET_CASES_TYPE, data: 'recovered' })
+            }
             title='Recovered'
             total={countryInfo.recovered}
             cases={countryInfo.todayRecovered}
@@ -121,7 +131,9 @@ function App() {
           <InfoBox
             casesType='deaths'
             active={casesType === 'deaths'}
-            handleClick={() => setCasesType('deaths')}
+            handleClick={() =>
+              dispatch({ type: actions.SET_CASES_TYPE, data: 'deaths' })
+            }
             title='Deaths'
             total={countryInfo.deaths}
             cases={countryInfo.todayDeaths}

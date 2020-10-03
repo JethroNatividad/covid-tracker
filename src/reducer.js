@@ -18,8 +18,7 @@ export const actions = {
   SET_COUNTRY_INFO: 'SET_COUNTRY_INFO',
   SET_TABLE_DATA: 'SET_TABLE_DATA',
   SET_MAP_COUNTRIES: 'SET_MAP_COUNTRIES',
-  SET_MAP_CENTER: 'SET_MAP_CENTER',
-  SET_MAP_ZOOM: 'SET_MAP_ZOOM',
+  SET_MAP_CENTERZOOM: 'SET_MAP_CENTERZOOM',
   SET_CASES_TYPE: 'SET_CASES_TYPE',
 };
 
@@ -36,10 +35,8 @@ export const stateReducer = (state, action) => {
       return { ...state, tableData: action.data };
     case actions.SET_MAP_COUNTRIES:
       return { ...state, mapCountries: action.data };
-    case actions.SET_MAP_CENTER:
-      return { ...state, mapCenter: action.data };
-    case actions.SET_MAP_ZOOM:
-      return { ...state, mapZoom: action.data };
+    case actions.SET_MAP_CENTERZOOM:
+      return { ...state, mapCenter: action.center, mapZoom: action.zoom };
     case actions.SET_CASES_TYPE:
       return { ...state, casesType: action.data };
     default:
