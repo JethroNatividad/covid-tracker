@@ -1,12 +1,21 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
-import { formatNumber } from './helpers';
+import { capitalizeFirstLetter, formatNumber } from './helpers';
 import React from 'react';
 import './InfoBox.css';
-function InfoBox({ title, active, casesType, cases, total, handleClick }) {
+import { useCountriesContext } from './CountriesProvider';
+import { actions } from './reducer';
+function InfoBox({ title, caseType }) {
+  const { dispatch, countryInfo, casesType } = useCountriesContext();
+  const active = caseType === casesType;
+  const total = countryInfo[caseType];
+  const cases = countryInfo[`today${capitalizeFirstLetter(caseType)}`];
   const color = {
     cases: ' #CC1034',
     recovered: ' #7dd71d',
     deaths: ' #fb4443',
+  };
+  const handleClick = () => {
+    dispatch({ type: actions.SET_CASES_TYPE, data: casesType });
   };
   return (
     <Card

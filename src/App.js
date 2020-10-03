@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '@material-ui/core';
 import './App.css';
-import { actions } from './reducer';
 import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
@@ -12,8 +11,6 @@ import Header from './Header';
 function App() {
   //CONTEXT STATE
   const {
-    dispatch,
-    countryInfo,
     tableData,
     mapCountries,
     mapCenter,
@@ -30,36 +27,9 @@ function App() {
         <Header />
 
         <div className='app__stats'>
-          <InfoBox
-            casesType='cases'
-            active={casesType === 'cases'}
-            handleClick={() =>
-              dispatch({ type: actions.SET_CASES_TYPE, data: 'cases' })
-            }
-            title='Coronavirus cases'
-            total={countryInfo.cases}
-            cases={countryInfo.todayCases}
-          />
-          <InfoBox
-            casesType='recovered'
-            active={casesType === 'recovered'}
-            handleClick={() =>
-              dispatch({ type: actions.SET_CASES_TYPE, data: 'recovered' })
-            }
-            title='Recovered'
-            total={countryInfo.recovered}
-            cases={countryInfo.todayRecovered}
-          />
-          <InfoBox
-            casesType='deaths'
-            active={casesType === 'deaths'}
-            handleClick={() =>
-              dispatch({ type: actions.SET_CASES_TYPE, data: 'deaths' })
-            }
-            title='Deaths'
-            total={countryInfo.deaths}
-            cases={countryInfo.todayDeaths}
-          />
+          <InfoBox caseType='cases' title='Coronavirus cases' />
+          <InfoBox caseType='recovered' title='Recovered' />
+          <InfoBox caseType='deaths' title='Deaths' />
         </div>
         <Map
           casesType={casesType}
