@@ -14,12 +14,13 @@ import Table from './Table';
 import { sortData } from './helpers';
 import Linegraph from './Linegraph';
 import 'leaflet/dist/leaflet.css';
+import { useCountriesContext } from './CountriesProvider';
+import { actions } from './reducer';
 function App() {
+  const { dispatch, countries, country } = useCountriesContext();
+
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
-  const [countries, setCountries] = useState([]);
-
-  const [country, setCountry] = useState('worldwide');
 
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
@@ -33,7 +34,7 @@ function App() {
   const handleCountryChange = (evt) => {
     evt.preventDefault();
     const countryCode = evt.target.value;
-    setCountry(countryCode);
+    dispatch({ type: actions.SET_COUNTRY, data: countryCode });
   };
 
   useEffect(() => {
@@ -61,19 +62,20 @@ function App() {
     };
     FetchCountryInfo();
   }, [country]);
+
   //fetches all countries to list in Select
   useEffect(() => {
     const FetchCountries = async () => {
       console.log('useeffect');
       let response = await axios.get(`${BASE_API}/countries`);
       let data = response.data;
-      let countries = response.data.map((country) => ({
+      let allcountries = await response.data.map((country) => ({
         name: country.country,
         value: country.countryInfo.iso2,
       }));
       const sortedByCases = sortData(data);
       setTableData(sortedByCases);
-      setCountries(countries);
+      dispatch({ type: actions.SET_COUNTRIES, data: allcountries });
       setMapCountries(data);
     };
     FetchCountries();
@@ -91,7 +93,7 @@ function App() {
               onChange={handleCountryChange}
             >
               <MenuItem value='worldwide'>Worldwide</MenuItem>
-              {countries.map((country) => (
+              {countries?.map((country) => (
                 <MenuItem key={country.name} value={country.value}>
                   {country.name}
                 </MenuItem>
