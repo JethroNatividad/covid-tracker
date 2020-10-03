@@ -10,13 +10,7 @@ import { useCountriesContext } from './CountriesProvider';
 import Header from './Header';
 function App() {
   //CONTEXT STATE
-  const {
-    tableData,
-    mapCountries,
-    mapCenter,
-    mapZoom,
-    casesType,
-  } = useCountriesContext();
+  const { tableData, casesType } = useCountriesContext();
 
   const BASE_API = 'https://disease.sh/v3/covid-19';
   console.log('re render');
@@ -31,12 +25,7 @@ function App() {
           <InfoBox caseType='recovered' title='Recovered' />
           <InfoBox caseType='deaths' title='Deaths' />
         </div>
-        <Map
-          casesType={casesType}
-          center={mapCenter}
-          zoom={mapZoom}
-          countries={mapCountries}
-        />
+        <Map />
       </div>
       <Card className='app__right'>
         <CardContent>
