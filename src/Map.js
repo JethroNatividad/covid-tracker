@@ -4,6 +4,7 @@ import { useCountriesContext } from './CountriesProvider.js';
 import { showDataOnMap } from './helpers.js';
 import './Map.css';
 function Map() {
+  console.log('in Map');
   const { mapCountries, mapCenter, mapZoom, casesType } = useCountriesContext();
   return (
     <div className='map'>

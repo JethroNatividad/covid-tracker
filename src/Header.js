@@ -5,6 +5,7 @@ import { useCountriesContext } from './CountriesProvider';
 import { actions } from './reducer';
 
 function Header() {
+  console.log('in Header');
   const { dispatch, countries, country } = useCountriesContext();
   //runs if Select country changes
   const handleCountryChange = (evt) => {

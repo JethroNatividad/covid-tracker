@@ -2,10 +2,12 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 import { capitalizeFirstLetter, formatNumber } from './helpers';
 import React from 'react';
 import './InfoBox.css';
-import { useCountriesContext } from './CountriesProvider';
+import { useCountriesContext, useCountriesDispatch } from './CountriesProvider';
 import { actions } from './reducer';
 function InfoBox({ title, caseType }) {
-  const { dispatch, countryInfo, casesType } = useCountriesContext();
+  console.log('in InfoBox');
+  const { countryInfo, casesType } = useCountriesContext();
+  const { dispatch } = useCountriesDispatch();
   const active = caseType === casesType;
   const total = countryInfo[caseType];
   const cases = countryInfo[`today${capitalizeFirstLetter(caseType)}`];

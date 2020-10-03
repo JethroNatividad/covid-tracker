@@ -5,7 +5,7 @@ import axios from 'axios';
 import { buildChartData, sortData } from './helpers';
 
 const CountriesContext = createContext();
-
+const CountriesDispatch = createContext();
 export const CountriesProvider = ({ children }) => {
   const BASE_API = 'https://disease.sh/v3/covid-19';
   const [state, dispatch] = useReducer(stateReducer, initialState);
@@ -99,9 +99,12 @@ export const CountriesProvider = ({ children }) => {
     FetchData();
   }, [casesType]);
   return (
-    <CountriesContext.Provider value={{ ...state, dispatch: dispatch }}>
-      {children}
+    <CountriesContext.Provider value={{ ...state }}>
+      <CountriesDispatch.Provider value={{ dispatch: dispatch }}>
+        {children}
+      </CountriesDispatch.Provider>
     </CountriesContext.Provider>
   );
 };
 export const useCountriesContext = () => useContext(CountriesContext);
+export const useCountriesDispatch = () => useContext(CountriesDispatch);

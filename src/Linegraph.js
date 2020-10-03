@@ -5,22 +5,27 @@ import options from './linegraphOptions';
 import { useCountriesContext } from './CountriesProvider';
 
 function Linegraph() {
-  const { linegraphData } = useCountriesContext();
+  console.log('in Linegraph');
+
+  const { linegraphData, casesType } = useCountriesContext();
   return (
-    <div className='linegraph'>
-      <Line
-        options={options}
-        data={{
-          datasets: [
-            {
-              data: linegraphData,
-              backgroundColor: 'rgba(204, 16, 52, 0.5)',
-              borderColor: '#cc1034',
-            },
-          ],
-        }}
-      />
-    </div>
+    <>
+      <strong>WORLDWIDE NEW {casesType.toUpperCase()}</strong>
+      <div className='linegraph'>
+        <Line
+          options={options}
+          data={{
+            datasets: [
+              {
+                data: linegraphData,
+                backgroundColor: 'rgba(204, 16, 52, 0.5)',
+                borderColor: '#cc1034',
+              },
+            ],
+          }}
+        />
+      </div>
+    </>
   );
 }
 
